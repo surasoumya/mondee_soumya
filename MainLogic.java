@@ -1,29 +1,44 @@
 package com.mondee;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+import java.util.Iterator;
+import java.util.List;
 
-public class MainLogic {
+import org.hibernate.Query;
+import org.hibernate.Session;    
+import org.hibernate.SessionFactory;    
+import org.hibernate.Transaction;  
+import org.hibernate.boot.Metadata;  
+import org.hibernate.boot.MetadataSources;  
+import org.hibernate.boot.registry.StandardServiceRegistry;  
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-	public static void main(String[] args) {
-		
-		Configuration cf=new Configuration();
-		cf.configure("hibernate.xml");
-		
-		SessionFactory sf=cf.buildSessionFactory();
-		
-		Session se=sf.openSession();
-		Transaction tx=se.beginTransaction();
-		
-		Student soumya =new Student();
-		soumya.setSid(103);
-		soumya.setSname("soumya");
-		soumya.setSmarks(450);
-		
-		se.save(soumya);
-		tx.commit();
-		se.close();
-	}
 
-}
+
+
+		public class MainLogic {
+
+			public static void main(String[] args) {
+
+				
+				Session session = HibernateUtil.getSessionFactory().openSession();
+
+			    Transaction t = session.beginTransaction();
+			    
+			
+			    Student s1=new Student();    
+			    
+			      //Insert Query:
+			    s1.setId(1);    
+			    s1.setName("Soumya");    
+			    s1.setMarks(45);  
+			    
+			    session.save(s1);  
+			    t.commit();  
+				session.close();
+
+			}
+
+		}
+
+		
+	
+
